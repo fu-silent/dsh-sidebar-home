@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Workspace Home",
+    "description": "Adds a Home entry to the sidebar: pick a workspace from the card/list Home panel, then the sidebar shows only that workspace's chats while the others fold below. Exit focus to get the shipped sidebar back untouched."
+  }
+}

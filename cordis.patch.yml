@@ -1,0 +1,3 @@
+- insert:
+    - id: sidebar-home
+      name: 'dsh-sidebar-home'

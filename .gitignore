@@ -1,0 +1,17 @@
+# Dependencies (the plugin itself has none; this keeps a stray install out of the repo)
+node_modules/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Build and test output (the plugin has no build step)
+dist/
+coverage/
+*.log
+npm-debug.log*
+
+# Local tarballs produced while inspecting a release
+*.tgz

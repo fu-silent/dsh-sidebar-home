@@ -1,0 +1,64 @@
+{
+  "name": "dsh-sidebar-home",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Workspace Home for DeepSeek Harness: pick a workspace from a sidebar Home panel, then focus the sidebar on that workspace's chats and fold the others below.",
+  "license": "MIT",
+  "author": "fu-silent",
+  "icon": "icon.svg",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fu-silent/dsh-sidebar-home.git"
+  },
+  "homepage": "https://github.com/fu-silent/dsh-sidebar-home#readme",
+  "bugs": {
+    "url": "https://github.com/fu-silent/dsh-sidebar-home/issues"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "workspace",
+    "sidebar",
+    "focus",
+    "web-ui"
+  ],
+  "engines": {
+    "dsh": ">=0.2.1-rc.5 <0.3.0-0"
+  },
+  "scripts": {
+    "test": "node test/render-smoke.cjs",
+    "validate": "node scripts/validate-manifest.mjs"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "README.zh.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "dsh": {
+    "bundle": { "patch": "./cordis.patch.yml" },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-sidebar"
+      ]
+    }
+  }
+}

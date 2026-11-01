@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Node ${{ matrix.node }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [20, 22]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Syntax check
+        run: |
+          node --check client.js
+          node --check index.js
+
+      - name: Manifest and bundle consistency
+        run: node scripts/validate-manifest.mjs
+
+      - name: Render smoke test (zero dependencies)
+        run: node test/render-smoke.cjs
+
+      - name: JSON files parse
+        run: |
+          node -e "const fs = require('node:fs'); for (const file of ['package.json', 'locale/en.json', 'locale/zh.json']) JSON.parse(fs.readFileSync(file, 'utf8')); console.log('JSON ok');"
+
+      - name: Bundle patch is valid YAML
+        run: |
+          ruby -rpsych -e "Psych.parse_file('cordis.patch.yml')"
